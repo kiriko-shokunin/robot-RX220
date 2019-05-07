@@ -18,3 +18,4 @@ extern void int_iic0_tei(void);
 extern int iic0_send(char*,int,int);
 extern char* iic0_gets();
 #endif
+ 
