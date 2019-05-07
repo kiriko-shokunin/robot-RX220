@@ -2,14 +2,14 @@
 
 #include "sci1.h"
 void INIT_SCI1(void){
-	SYSTEM.PRCR.WORD = 0xA502;		// æ¶ˆè²»é›»åŠ›ä½æ¸›æ©Ÿèƒ½è¨­å®šãƒ¬ã‚¸ã‚¹ã‚¿æ›¸ãè¾¼ã¿è¨±å¯
+	SYSTEM.PRCR.WORD = 0xA502;		// Á”ï“d—Í’áŒ¸‹@”\İ’èƒŒƒWƒXƒ^‘‚«‚İ‹–‰Â
 	MSTP(SCI1)=0;
-	SYSTEM.PRCR.WORD = 0xA500;		// æ¶ˆè²»é›»åŠ›ä½æ¸›æ©Ÿèƒ½è¨­å®šãƒ¬ã‚¸ã‚¹ã‚¿æ›¸ãè¾¼ã¿ç¦æ­¢
-	SCI1.SCR.BIT.TE =0;			//é€ä¿¡åœæ­¢
+	SYSTEM.PRCR.WORD = 0xA500;		// Á”ï“d—Í’áŒ¸‹@”\İ’èƒŒƒWƒXƒ^‘‚«‚İ‹Ö~
+	SCI1.SCR.BIT.TE =0;			//‘—M’â~
 	SCI1.SCR.BIT.RE =0;
 	SCI1.SMR.BIT.CKS=0; 			// PCLK/1
 	SCI1.SMR.BIT.STOP =0;			// 1stop bit
-	SCI1.SCR.BIT.TEIE =0;			//ãƒˆãƒ©ãƒ³ã‚¹ãƒŸãƒƒãƒˆã‚¨ãƒ³ãƒ‰ã‚¤ãƒ³ã‚¿ãƒ©ãƒ—ãƒˆã‚¤ãƒãƒ¼ãƒ–ãƒ«
+	SCI1.SCR.BIT.TEIE =0;			//ƒgƒ‰ƒ“ƒXƒ~ƒbƒgƒGƒ“ƒhƒCƒ“ƒ^ƒ‰ƒvƒgƒCƒl[ƒuƒ‹
 	SCI1.SCR.BIT.TIE =1;	
 	SCI1.SCR.BIT.RIE =1;
 	ICU.IER[27].BIT.IEN3		= 1;	//	
@@ -17,18 +17,18 @@ void INIT_SCI1(void){
 	ICU.IER[27].BIT.IEN5		= 1;	//
 	ICU.IPR[218].BIT.IPR		= 15;	//004
 	SCI1.SEMR.BIT.ABCS = 1;			//1syc8bit
-	SCI1.SEMR.BIT.NFEN = 1;			//ãƒã‚¤ã‚ºãƒ•ã‚£ãƒ«ã‚¿
+	SCI1.SEMR.BIT.NFEN = 1;			//ƒmƒCƒYƒtƒBƒ‹ƒ^
 	BPS(115200);
-	MPC.PWPR.BIT.B0WI = 0;			//PFSWEã¸ã®æ›¸ãè¾¼ã¿è¨±å¯	
-	MPC.PWPR.BIT.PFSWE = 1;			//PFCãƒ¬ã‚¸ã‚¹ã‚¿ã¸æ›¸ãè¾¼ã¿è¨±å¯
+	MPC.PWPR.BIT.B0WI = 0;			//PFSWE‚Ö‚Ì‘‚«‚İ‹–‰Â	
+	MPC.PWPR.BIT.PFSWE = 1;			//PFCƒŒƒWƒXƒ^‚Ö‘‚«‚İ‹–‰Â
 	PORT2.PMR.BIT.B6 = 1;
 	PORT3.PMR.BIT.B0 = 1;
 	MPC.P30PFS.BIT.PSEL = 10;		// RXD1
 	MPC.P26PFS.BIT.PSEL = 10;		// TXD1
-	MPC.PWPR.BIT.PFSWE = 0;			//PFCãƒ¬ã‚¸ã‚¹ã‚¿ã¸æ›¸ãè¾¼ã¿ç¦æ­¢	
-	MPC.PWPR.BIT.B0WI = 1;			//PFSWEã¸ã®æ›¸ãè¾¼ã¿ç¦æ­¢
-	SCI1.SCR.BIT.TE =0;			//é€ä¿¡é–‹å§‹	
-	SCI1.SCR.BIT.RE =1;			//å—ä¿¡é–‹å§‹
+	MPC.PWPR.BIT.PFSWE = 0;			//PFCƒŒƒWƒXƒ^‚Ö‘‚«‚İ‹Ö~	
+	MPC.PWPR.BIT.B0WI = 1;			//PFSWE‚Ö‚Ì‘‚«‚İ‹Ö~
+	SCI1.SCR.BIT.TE =0;			//‘—MŠJn	
+	SCI1.SCR.BIT.RE =1;			//óMŠJn
 	SCI1.TDR = 0xff;
 }
 void int_scr1_txi1(void){
@@ -44,7 +44,7 @@ void int_scr1_txi1(void){
 
 	}
 	trans_b[(i-1)]=0x00;
-}//intprg.cã§å‘¼ã³å‡ºã™
+}//intprg.c‚ÅŒÄ‚Ño‚·
 void int_scr1_tei1(void){
 	SCI1.SCR.BIT.TIE =0;
 	SCI1.SCR.BIT.TE =0;	//
@@ -52,7 +52,7 @@ void int_scr1_tei1(void){
 	PORT2.PMR.BIT.B6 = 0;
 	PORT2.PDR.BIT.B6 = 1;
 	PORT2.PODR.BIT.B6=1;
-}//intprg.cã§å‘¼ã³å‡ºã™
+}//intprg.c‚ÅŒÄ‚Ño‚·
 void int_scr1_rxi1(void){
 	int n;
 	setpsw_i();
@@ -87,29 +87,29 @@ void int_scr1_rxi1(void){
 			}
 			break;
 	}
-}//intprg.cã§å‘¼ã³å‡ºã™
+}//intprg.c‚ÅŒÄ‚Ño‚·
 void int_scr1_eri1(void){
 	int er=1;
 	if(SCI.SSR.BIT.PER == 1){
-		SCI.SSR.BIT.PER=0;///ãƒ‘ãƒªãƒ†ã‚£ã‚¨ãƒ©ãƒ¼ãƒ•ãƒ©ã‚°
+		SCI.SSR.BIT.PER=0;///ƒpƒŠƒeƒBƒGƒ‰[ƒtƒ‰ƒO
 		er= 2;
 	}
 	if(SCI.SSR.BIT.FER == 1){
-		SCI.SSR.BIT.FER=0;///ãƒ•ãƒ¬ãƒ¼ãƒ ã‚¨ãƒ©ãƒ¼ãƒ•ãƒ©ã‚°
+		SCI.SSR.BIT.FER=0;///ƒtƒŒ[ƒ€ƒGƒ‰[ƒtƒ‰ƒO
 		er= 3;
 	}
 	if(SCI.SSR.BIT.ORER == 1){
-		SCI.SSR.BIT.ORER=0;//ã‚ªãƒ¼ãƒãƒ©ãƒ³ã‚¨ãƒ©ãƒ¼ãƒ•ãƒ©ã‚°
+		SCI.SSR.BIT.ORER=0;//ƒI[ƒoƒ‰ƒ“ƒGƒ‰[ƒtƒ‰ƒO
 		er = 4;
 	}
 	sci1_error =er;	
-}//intprg.cã§å‘¼ã³å‡ºã™
+}//intprg.c‚ÅŒÄ‚Ño‚·
 void sci1_put_start(void){
 	PORT2.PMR.BIT.B6 = 1;
 	SCI1.SCR.BIT.TIE =1;
-	SCI1.SCR.BIT.TE =1;	//é€ä¿¡é–‹å§‹
+	SCI1.SCR.BIT.TE =1;	//‘—MŠJn
 }
-void sci1_puts(unsigned char* c){//æ–‡å­—åˆ—é€ä¿¡é–¢æ•°
+void sci1_puts(unsigned char* c){//•¶š—ñ‘—MŠÖ”
 	int i;
 	if(TEND != 1)return;
 	for(i=0; (*(c+i)!='\0')&&(sizeof(trans_b)>=i);i++) {
@@ -117,7 +117,7 @@ void sci1_puts(unsigned char* c){//æ–‡å­—åˆ—é€ä¿¡é–¢æ•°
 	}
 	sci1_put_start();
 }
-void sci1_put_data(unsigned char* c,int n){//ãƒ‡ãƒ¼ã‚¿é€ä¿¡ç”¨é–¢æ•°
+void sci1_put_data(unsigned char* c,int n){//ƒf[ƒ^‘—M—pŠÖ”
 	int i;
 	if(TEND != 1)return;
 	for(i=0; i<=n-1;i++){
@@ -125,7 +125,7 @@ void sci1_put_data(unsigned char* c,int n){//ãƒ‡ãƒ¼ã‚¿é€ä¿¡ç”¨é–¢æ•°
 	}
 	sci1_put_start();
 }
-int sci1_gets( volatile unsigned char* p){//å—ä¿¡æ–‡å­—åˆ—èª­ã¿å‡ºã—é–¢æ•°
+int sci1_gets( volatile unsigned char* p){//óM•¶š—ñ“Ç‚İo‚µŠÖ”
 	int n ;
 	for( n=0 ;  (get_buff_2[n]!='\0')&&(n<=sizeof(get_buff_2)); n++){
 		*(p+n) = get_buff_2[n];
