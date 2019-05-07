@@ -57,20 +57,16 @@ void init_riic0(void){
 }
 void int_iic0_eei(void){
 	if( RIIC0.ICSR2.BIT.TMOF==1 ){
-		sci1_puts("--ENTER-TMO\r\n");
 		RIIC0.ICCR2.BIT.SP			= 1;	//ストップコンディションの要求をする
 	}
 	if(RIIC0.ICSR2.BIT.NACKF==1){
-		sci1_puts("--ENTER-NACK\r\n");
 		RIIC0.ICCR2.BIT.SP			= 1;	//ストップコンディションの要求をする
 	}
 	if(RIIC0.ICSR2.BIT.AL==1){
-		sci1_puts("--ENTER-AL\r\n");
 		RIIC0.ICCR2.BIT.SP			= 1;	//ストップコンディションの要求をする
 	}
 	RIIC0.ICCR1.BIT.IICRST=1;
 	RIIC0.ICCR1.BIT.ICE=0;
-	sci1_puts("--ENTER-EE\r\n");
 	RIIC0.ICSR2.BIT.NACKF=0;
 	RIIC0.ICSR2.BIT.TMOF=0;
 	RIIC0.ICSR2.BIT.AL=0;	
@@ -107,7 +103,6 @@ void int_iic0_rxi(void){
 			RIIC0.ICCR2.BIT.SP			= 1;	//ストップコンディションの要求をする
 			RIIC0.ICMR3.BIT.ACKWP=1;
 			RIIC0.ICMR3.BIT.ACKBT=1;	
-		//	sci1_puts("--ENTER--rxi -end\r\n");
 	}else{
 		RIIC0.ICMR3.BIT.ACKWP=1;
 		RIIC0.ICMR3.BIT.ACKBT=0;	
@@ -125,8 +120,6 @@ void int_iic0_txi(void){
 		if( n < send_data_num ){
 				RIIC0.ICDRT = send_data[n++];
 		}else{
-			
-		//		sci1_puts("--ENTER--txi--end\r\n");
 				n=0;
 				RIIC0.ICIER.BIT.TIE 			= 0;	//　送信データエンプティ割込み
 				IEN(RIIC0,TXI0)				= 0;
@@ -199,7 +192,6 @@ int iic0_send(char* string , int data_num,int address){
 		IEN(RIIC0,TXI0)				= 1;
 		IEN(RIIC0,TEI0)				= 0;
 		RIIC0.ICCR2.BIT.ST = 1;	
-	//	RIIC0.ICDRT =
 		send_data[0]				= (address<<1);
 	}
 	return r_data;
